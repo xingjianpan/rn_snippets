@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
     "jest-expo": "^0.2.1",
     "react-native-scripts": "0.0.20",
     "react-test-renderer": "~15.4.0"
@@ -20,6 +23,8 @@
   },
   "dependencies": {
     "axios": "^0.15.3",
+    "eslint": "^3.18.0",
+    "eslint-plugin-react": "^6.10.0",
     "expo": "14.0.2",
     "firebase": "^3.7.2",
     "lodash": "^4.17.4",

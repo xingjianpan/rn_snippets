@@ -26,19 +26,12 @@ export const ListIsLoading = (bool) => {
   };
 };
 
-const getToken = () => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    return { headers: { Authorization: `Token ${token}` } };
-  }
-  return {};
-};
+
 
 export const fetchList = (url = `${PUBLIC_SNIPPETS_URL}/`) => {
   return (dispatch) => {
     dispatch(ListIsLoading(true));
-    const token = getToken();
-    axios.get(url, token)
+    axios.get(url)
       .then((response) => {
         dispatch(fetchListSuccess(response))
       })
@@ -80,8 +73,7 @@ export const infiniteLoadEndOfList = (response) => {
 export const infiniteLoad = (url = `${PUBLIC_SNIPPETS_URL}/`) => {
   return (dispatch) => {
     dispatch(infiniteLoading(true));
-    const token = getToken();
-    axios.get(url, token)
+    axios.get(url)
       .then((response) => {
         if (response.data.next) {
           dispatch(infiniteLoadSuccess(response));

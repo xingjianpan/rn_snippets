@@ -1,42 +1,53 @@
-import _ from 'lodash';
+// import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ListView } from 'react-native';
-import { ScrollView } from 'react-native';
-import axios from 'axios';
-import { View, Text } from 'react-native';
-import { fetchList, setIgnoreLastFetch, hideNotification, infiniteLoad, resetList } from '../actions';
+import { View, ScrollView } from 'react-native';
+import { fetchList } from '../actions';
+import { PUBLIC_SNIPPETS_URL } from '../services/api';
+import SnippetDetail from './SnippetDetail';
 
-const SnippetList = () => {
-  return (
-    <View>
-      <Text>sdf</Text>
-    </View>
-  )
+class SnippetList extends Component {
+  componentDidMount() {
+    this.props.fetchList(PUBLIC_SNIPPETS_URL);
+  }
+
+  componentWillUnmount() {
+    // console.log('will unmount');
+    this.props.resetList();
+  }
+
+  renderSnippetList() {
+    return this.props.snippets.map(snippet =>
+      <SnippetDetail snippet={snippet} key={snippet.id} />,
+    );
+  }
+
+  render() {
+    return (
+      <View>
+        <ScrollView>
+          {this.renderSnippetList()}
+        </ScrollView>
+      </View>
+    );
+  }
 }
-
 
 const mapStateToPros = (state) => {
   const { snippets, isLoading, hasErrored,
           nextHref, prevHref,
           isInfiniteLoading, hasMoreToLoad,
         } = state.snippet_list;
-  const { isActive, message, action } = state.notifications;
-
   return {
     isLoading,
     snippets,
     hasErrored,
     nextHref,
     prevHref,
-    isActive,
-    message,
-    action,
     isInfiniteLoading,
     hasMoreToLoad,
   };
 };
 
-export default connect(mapStateToPros,
-  { fetchList, setIgnoreLastFetch, hideNotification, infiniteLoad, resetList })(SnippetList);
+export default connect(mapStateToPros, { fetchList })(SnippetList);
 

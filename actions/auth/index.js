@@ -5,14 +5,14 @@ import * as actionTypes from '../../constants/actionTypes';
 
 export const emailChanged = (text) => {
   return {
-    type: EMAIL_CHANGED,
+    type: actionTypes.EMAIL_CHANGED,
     payload: text
   };
 };
 
 export const passwordChanged = (text) => {
   return {
-    type: PASSWORD_CHANGED,
+    type: actionTypes.PASSWORD_CHANGED,
     payload: text
   };
 };
