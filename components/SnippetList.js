@@ -1,14 +1,23 @@
-// import _ from 'lodash';
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, ScrollView } from 'react-native';
+import { ListView, View, ScrollView } from 'react-native';
 import { fetchList } from '../actions';
-import { PUBLIC_SNIPPETS_URL } from '../services/api';
 import SnippetDetail from './SnippetDetail';
+import ListItem from './ListItem';
 
 class SnippetList extends Component {
-  componentDidMount() {
-    this.props.fetchList(PUBLIC_SNIPPETS_URL);
+  componentWillMount() {
+    this.props.fetchList();
+    this.createDataSource(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // nextProps are the next set of props that this component
+    // will be rendered with
+    // this.props is still the old set of props
+
+    this.createDataSource(nextProps);
   }
 
   componentWillUnmount() {
@@ -16,36 +25,53 @@ class SnippetList extends Component {
     this.props.resetList();
   }
 
-  renderSnippetList() {
-    return this.props.snippets.map(snippet =>
-      <SnippetDetail snippet={snippet} key={snippet.id} />,
-    );
+  createDataSource({ snippets }) {
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2,
+    });
+
+    this.dataSource = ds.cloneWithRows(snippets);
   }
+
+  renderRow(snippet) {
+    return <ListItem snippet={snippet} />;
+  }
+
+
+  // renderSnippetList() {
+  //   return this.props.snippets.map(snippet =>
+  //     <SnippetDetail snippet={snippet} key={snippet.id} />,
+  //   );
+  // }
 
   render() {
     return (
-      <View>
-        <ScrollView>
-          {this.renderSnippetList()}
-        </ScrollView>
-      </View>
+      <ListView
+        enableEmptySections
+        dataSource={this.dataSource}
+        renderRow={this.renderRow}
+      />
     );
   }
+
+
+  // render() {
+  //   return (
+  //     <View>
+  //       <ScrollView>
+  //         {this.renderSnippetList()}
+  //       </ScrollView>
+  //     </View>
+  //   );
+  // }
 }
 
 const mapStateToPros = (state) => {
-  const { snippets, isLoading, hasErrored,
-          nextHref, prevHref,
-          isInfiniteLoading, hasMoreToLoad,
-        } = state.snippet_list;
+  const snippets = _.map(state.snippet_list.snippets, (val, uid) => {
+    return { ...val, uid };
+  });
   return {
-    isLoading,
     snippets,
-    hasErrored,
-    nextHref,
-    prevHref,
-    isInfiniteLoading,
-    hasMoreToLoad,
   };
 };
 
