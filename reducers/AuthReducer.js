@@ -7,13 +7,14 @@ const INITIAL_STATE = {
   user: null,
   error: '',
   loading: false,
+  token: '',
 };
 
 export default (state = INITIAL_STATE, action) => {
   console.log(action)
   switch (action.type) {
     case actionTypes.AUTH_USER:
-      return { ...state, error: '', authenticated: true };
+      return { ...state, error: '', authenticated: true, token: action.payload };
     case actionTypes.UNAUTH_USER:
       return { ...state, authenticated: false, user: null };
     case actionTypes.CLEAR_AUTH_ERROR:

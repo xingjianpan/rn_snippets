@@ -7,8 +7,8 @@ import SnippetForm from './SnippetForm';
 class SnippetCreate extends Component {
 
   onButtonPress() {
-    const { title, description, code } = this.props;
-    this.props.snippetCreate({ title, description, code });
+    const { title, description, code, token } = this.props;
+    this.props.snippetCreate({ title, description, code, token });
   }
   render() {
     return (
@@ -26,7 +26,8 @@ class SnippetCreate extends Component {
 
 const mapStateToProps = (state) => {
   const { title, description, code } = state.snippetForm;
-  return { title, description, code };
+  const { token } = state.auth;
+  return { title, description, code, token };
 };
 
 export default connect(mapStateToProps, {

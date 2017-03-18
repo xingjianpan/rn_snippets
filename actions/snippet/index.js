@@ -1,8 +1,7 @@
 import axios from 'axios';
+import { Actions } from 'react-native-router-flux';
 import * as actionTypes from '../../constants/actionTypes';
 import { SNIPPET_ROOT_URL } from '../../services/api';
-import { Actions } from 'react-native-router-flux';
-
 
 export const snippetUpdate = ({ prop, value }) => {
   return {
@@ -12,16 +11,16 @@ export const snippetUpdate = ({ prop, value }) => {
 };
 
 
-export const addItem = ({ title, code, linenos, language, style, ispublic, description }) => {
+export const snippetCreate = ({ title, code, description, token }) => {
   return (dispatch) => {
     axios.post(
       `${SNIPPET_ROOT_URL}/`,
-      { title, code, linenos, language, style, ispublic, description },
-      { headers: { Authorization: `Token ${localStorage.getItem('token')}` } },
+      { title, code, description, ispublic: true },
+      { headers: { Authorization: `Token ${token}` } },
     )
-    .then((response) => {
-      browserHistory.push('/');
-      dispatch(fetchList(`${SNIPPET_ROOT_URL}/`));
+    .then(() => {
+      dispatch({ type: actionTypes.SNIPPET_CREATE });
+      Actions.snippetList({ type: 'reset' });
     });
   };
 };
