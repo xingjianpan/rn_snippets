@@ -46,6 +46,12 @@ export function loginUser({ email, password }) {
     axios.post(`${AUTH_ROOT_URL}/login/`, { email, password })
       .then((response) => {
         const token = response.data.key;
+        storage.save({
+          key: 'token',
+          rawData: {
+            token,
+          },
+        });
         loginUserSuccess(dispatch, token);
       })
       .catch(() => loginUserFail(dispatch));

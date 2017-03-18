@@ -4896,6 +4896,10 @@ react-native-scripts@0.0.20:
     qrcode-terminal "^0.11.0"
     xdl "^36.0.0"
 
+react-native-storage@^0.1.5:
+  version "0.1.5"
+  resolved "http://registry.npm.taobao.org/react-native-storage/download/react-native-storage-0.1.5.tgz#91d77560e41cc9e62d587b55a21b3d6ebaba5599"
+
 "react-native-svg@https://github.com/exponent/react-native-svg/archive/4.4.1.tar.gz":
   version "4.4.1"
   resolved "https://github.com/exponent/react-native-svg/archive/4.4.1.tar.gz#fb1719b0d15fabc1b5c3aca8a94b1629409c1d67"

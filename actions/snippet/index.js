@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as actionTypes from '../../constants/actionTypes';
 import { SNIPPET_ROOT_URL } from '../../services/api';
-import { fetchList } from '../../actions/snippet-list';
+import { Actions } from 'react-native-router-flux';
 
 
 export const snippetUpdate = ({ prop, value }) => {
@@ -20,6 +20,7 @@ export const addItem = ({ title, code, linenos, language, style, ispublic, descr
       { headers: { Authorization: `Token ${localStorage.getItem('token')}` } },
     )
     .then((response) => {
+      browserHistory.push('/');
       dispatch(fetchList(`${SNIPPET_ROOT_URL}/`));
     });
   };
