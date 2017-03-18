@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Text, TouchableWithoutFeedback, View } from 'react-native';
+import { TouchableWithoutFeedback, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { CardSection } from './common';
 import SnippetDetail from './SnippetDetail';
 
 class ListItem extends Component {

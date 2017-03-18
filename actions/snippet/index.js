@@ -1,7 +1,16 @@
 import axios from 'axios';
 import * as actionTypes from '../../constants/actionTypes';
-import { SNIPPET_ROOT_URL, PUBLIC_SNIPPETS_URL } from '../../services/api';
+import { SNIPPET_ROOT_URL } from '../../services/api';
 import { fetchList } from '../../actions/snippet-list';
+
+
+export const snippetUpdate = ({ prop, value }) => {
+  return {
+    type: actionTypes.SNIPPET_UPDATE,
+    payload: { prop, value },
+  };
+};
+
 
 export const addItem = ({ title, code, linenos, language, style, ispublic, description }) => {
   return (dispatch) => {
