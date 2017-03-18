@@ -69,8 +69,8 @@ const styles = {
   errorTextStyle: {
     fontSize: 20,
     alignSelf: 'center',
-    color: 'red'
-  }
+    color: 'red',
+  },
 };
 
 const mapStateToProps = ({ auth }) => {
@@ -80,5 +80,5 @@ const mapStateToProps = ({ auth }) => {
 };
 
 export default connect(mapStateToProps, {
-  emailChanged, passwordChanged, loginUser
+  emailChanged, passwordChanged, loginUser,
 })(LoginForm);

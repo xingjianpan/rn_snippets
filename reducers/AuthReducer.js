@@ -6,19 +6,17 @@ const INITIAL_STATE = {
   password: '',
   user: null,
   error: '',
-  loading: false
+  loading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
-  console.log(action)
+  console.log(action);
   switch (action.type) {
 
     case actionTypes.AUTH_USER:
       return { ...state, error: '', authenticated: true };
     case actionTypes.UNAUTH_USER:
       return { ...state, authenticated: false, user: null };
-    case actionTypes.AUTH_ERROR:
-      return { ...state, error: action.payload };
     case actionTypes.CLEAR_AUTH_ERROR:
       return { error: '' };
     case actionTypes.SET_USER:
@@ -29,10 +27,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, password: action.payload };
     case actionTypes.LOGIN_USER:
       return { ...state, loading: true, error: '' };
-    case actionTypes.LOGIN_USER_SUCCESS:
-      return { ...state, ...INITIAL_STATE, user: action.payload };
     case actionTypes.LOGIN_USER_FAIL:
-      return { ...state, error: 'Authentication Failed.', password: '', loading: false };
+      return { ...state, error: 'Authentication Failed', password: '', loading: false };
     default:
       return state;
   }

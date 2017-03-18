@@ -3,7 +3,7 @@ import { Text, View, Linking } from 'react-native';
 import { Card, CardSection, Button } from './common';
 
 const SnippetDetail = ({ snippet }) => {
-  const { title, description, highlight } = snippet;
+  const { title, description, code, highlight } = snippet;
   const { headerContentStyle, headerTextStyle } = styles;
   return (
     <Card>
@@ -15,6 +15,11 @@ const SnippetDetail = ({ snippet }) => {
       <CardSection>
         <View style={headerContentStyle}>
           <Text style={headerTextStyle}> {description}</Text>
+        </View>
+      </CardSection>
+      <CardSection>
+        <View style={headerContentStyle}>
+          <Text style={headerTextStyle}> {code}</Text>
         </View>
       </CardSection>
       <CardSection>
