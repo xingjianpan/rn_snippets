@@ -10,9 +10,7 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-  console.log(action);
   switch (action.type) {
-
     case actionTypes.AUTH_USER:
       return { ...state, error: '', authenticated: true };
     case actionTypes.UNAUTH_USER:
