@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
-import { AUTH_ROOT_URL } from '../services/api'
-import * as actionTypes from '../constants/actionTypes';
+import { AUTH_ROOT_URL } from '../../services/api'
+import * as actionTypes from '../../constants/actionTypes';
 
 export const emailChanged = (text) => {
   return {
