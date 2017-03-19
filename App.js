@@ -27,7 +27,7 @@ storage.load({
 }).then((ret) => {
   if (ret.token) {
     store.dispatch(getUserDetails(ret.token));
-    Actions.main();
+    Actions.main({ type: 'reset' });
   }
 });
 
