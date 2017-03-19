@@ -13,7 +13,7 @@ const RouterComponent = () => {
         <Scene key="login" component={LoginForm} title="Please Login" />
       </Scene>
 
-      <Scene key="main" >
+      <Scene key="main" tabs={true} >
         <Scene
           onRight={() => Actions.snippetCreate()}
           rightTitle="Add"
