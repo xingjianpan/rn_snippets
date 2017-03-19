@@ -25,15 +25,29 @@ export const snippetCreate = ({ title, code, description, token }) => {
   };
 };
 
-export const editItem = (item) => {
-  const { id, title, code, linenos, language, style, ispublic, description } = item;
+export const snippetSave = ({ id, title, code, description, token }) => {
   return (dispatch) => {
     axios.put(
       `${SNIPPET_ROOT_URL}/${id}/`,
-      { title, code, linenos, language, style, ispublic, description },
-      { headers: { Authorization: `Token ${localStorage.getItem('token')}` } },
+      { title, code, description },
+      { headers: { Authorization: `Token ${token}` } },
     )
-    .then((response) => {
+    .then(() => {
+      dispatch({ type: actionTypes.SNIPPET_SAVE_SUCCESS });
+      Actions.snippetList({ type: 'reset' });
+    });
+  };
+};
+
+
+export const snippetDelete = ({ id, token }) => {
+  return () => {
+    //  The second parameter to axios.delete is config, not data
+    axios.delete(
+      `${SNIPPET_ROOT_URL}/${id}/`,
+      { headers: { Authorization: `Token ${token}` } },
+    ).then(() => {
+      Actions.snippetList({ type: 'reset' });
     });
   };
 };

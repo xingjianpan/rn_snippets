@@ -5,7 +5,7 @@ import SnippetDetail from './SnippetDetail';
 
 class ListItem extends Component {
   onRowPress() {
-    Actions.snippetEdit({ employee: this.props.employee });
+    Actions.snippetEdit({ snippet: this.props.snippet });
   }
 
   render() {
