@@ -26,9 +26,8 @@ export const ListIsLoading = (bool) => {
   };
 };
 
-
-
 export const fetchList = (url = `${PUBLIC_SNIPPETS_URL}/`) => {
+
   return (dispatch) => {
     dispatch(ListIsLoading(true));
     axios.get(url)
