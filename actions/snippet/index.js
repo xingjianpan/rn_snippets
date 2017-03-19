@@ -11,6 +11,11 @@ export const snippetUpdate = ({ prop, value }) => {
   };
 };
 
+export const resetSnippetForm = () => {
+  return {
+    type: actionTypes.SNIPPET_FORM_RESET,
+  };
+};
 
 export const snippetCreate = ({ title, code, description, token }) => {
   return (dispatch) => {
@@ -51,12 +56,7 @@ export const snippetDelete = ({ id, token }) => {
       { headers: { Authorization: `Token ${token}` } },
     ).then(() => {
       dispatch(fetchList());
-
       Actions.snippetList({ type: 'reset' });
-
     });
   };
 };
-
-
-

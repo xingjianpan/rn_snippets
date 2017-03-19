@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
 import SnippetForm from './SnippetForm';
-import { snippetUpdate, snippetSave, snippetDelete } from '../actions';
+import { snippetUpdate, snippetSave, snippetDelete, resetSnippetForm } from '../actions';
 import { Card, CardSection, Button, Confirm } from './common'
 
 class SnippetEdit extends Component {
@@ -16,6 +16,9 @@ class SnippetEdit extends Component {
     });
   }
 
+  componentWillUnmount(){
+    this.props.resetSnippetForm();
+  }
   onButtonPress() {
     const { title, code, description, token } = this.props;
     this.props.snippetSave({ code, description, title, token, id: this.props.snippet.id, ispublic:true });
@@ -43,7 +46,7 @@ class SnippetEdit extends Component {
 
         <CardSection>
           <Button onPress={() => this.setState({ showModal: !this.state.showModal })}>
-            FireEmployee
+            Delete Record
           </Button>
         </CardSection>
 
@@ -66,5 +69,5 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-  snippetUpdate, snippetDelete, snippetSave,
+  snippetUpdate, snippetDelete, snippetSave, resetSnippetForm,
 })(SnippetEdit);
