@@ -26,6 +26,10 @@ export function getUserDetails(token) {
     .then((response) => {
       dispatch({ type: actionTypes.SET_USER, payload: response });
       dispatch({ type: actionTypes.AUTH_USER, payload: token });
+    })
+    .catch(() => {
+      dispatch(signoutUser());
+      Actions.auth()
     });
   };
 }
